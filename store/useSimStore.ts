@@ -157,7 +157,7 @@ export const useSimStore = create<SimState>((set, get) => ({
   resetSimulation: () => {
     resetPidCounter();
     set({
-      step: 'create',
+      step: 'algorithm',
       processes: [],
       selectedAlgorithm: null,
       algorithmInputs: {},

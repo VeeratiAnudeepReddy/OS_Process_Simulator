@@ -108,7 +108,7 @@ export default function ProcessCreation() {
         <div className="flex items-center gap-3 mb-2">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-orbitron font-bold"
             style={{ background: 'rgba(0,229,255,0.15)', border: '1px solid rgba(0,229,255,0.3)', color: '#00E5FF' }}>
-            1
+            2
           </div>
           <h2 className="font-orbitron text-xl font-bold text-white">Process Creation</h2>
         </div>
@@ -302,8 +302,14 @@ export default function ProcessCreation() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-8 flex justify-end"
+            className="mt-8 flex justify-between items-center"
           >
+            <button
+              onClick={() => goToStep('algorithm')}
+              className="flex items-center gap-2 text-sm font-mono text-slate-500 hover:text-slate-300 transition-colors cursor-pointer"
+            >
+              ← Back
+            </button>
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}

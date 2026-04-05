@@ -86,7 +86,7 @@ export default function LandingScreen() {
         transition={{ delay: 1.3, type: 'spring', stiffness: 200 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => goToStep('create')}
+        onClick={() => goToStep('algorithm')}
         className="relative group px-10 py-4 rounded-xl font-orbitron font-bold text-lg tracking-widest uppercase text-black cursor-pointer overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #00E5FF, #4488FF)',

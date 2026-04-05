@@ -1,10 +1,35 @@
 'use client';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSimStore } from '@/store/useSimStore';
 import ExplainBox from './ExplainBox';
+import AlgorithmInputModal, { AlgorithmInputs } from './AlgorithmInputModal';
 
 export default function ReadyQueueDisplay() {
-  const { processes, goToStep } = useSimStore();
+  const { processes, goToStep, selectedAlgorithm, setAlgorithmInputs, startExecution } = useSimStore();
+  const [showInputModal, setShowInputModal] = useState(false);
+
+  const handleStartExecution = () => {
+    const needsInputs =
+      selectedAlgorithm === 'priority' ||
+      selectedAlgorithm === 'preemptive-priority' ||
+      selectedAlgorithm === 'rr';
+
+    if (needsInputs) {
+      setShowInputModal(true);
+    } else {
+      setAlgorithmInputs({});
+      startExecution();
+      goToStep('execution');
+    }
+  };
+
+  const handleInputsComplete = (inputs: AlgorithmInputs) => {
+    setAlgorithmInputs(inputs);
+    setShowInputModal(false);
+    startExecution();
+    goToStep('execution');
+  };
 
   return (
     <motion.div
@@ -18,7 +43,7 @@ export default function ReadyQueueDisplay() {
         <div className="flex items-center gap-3 mb-2">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-orbitron font-bold"
             style={{ background: 'rgba(255,184,0,0.15)', border: '1px solid rgba(255,184,0,0.3)', color: '#FFB800' }}>
-            2
+            3
           </div>
           <h2 className="font-orbitron text-xl font-bold text-white">Ready Queue</h2>
         </div>
@@ -174,7 +199,7 @@ export default function ReadyQueueDisplay() {
         <motion.button
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
-          onClick={() => goToStep('algorithm')}
+          onClick={handleStartExecution}
           className="flex items-center gap-2 px-6 py-3 rounded-xl font-orbitron font-bold text-sm cursor-pointer"
           style={{
             background: 'linear-gradient(135deg, #00E5FF, #4488FF)',
@@ -182,10 +207,17 @@ export default function ReadyQueueDisplay() {
             boxShadow: '0 0 20px rgba(0,229,255,0.4)',
           }}
         >
-          Choose Algorithm
+          Start Execution
           <motion.span animate={{ x: [0, 3, 0] }} transition={{ duration: 1, repeat: Infinity }}>→</motion.span>
         </motion.button>
       </div>
+
+      {/* Algorithm Input Modal */}
+      <AlgorithmInputModal
+        isOpen={showInputModal}
+        onClose={() => setShowInputModal(false)}
+        onComplete={handleInputsComplete}
+      />
     </motion.div>
   );
 }

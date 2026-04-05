@@ -19,7 +19,7 @@ export default function CPUExecution() {
     isPlaying,
     executeNextStep,
     setPlaying,
-    resetToAlgorithmSelection,
+    goToStep,
     isExplainMode,
     algorithmInputs,
     visibleBlocks,
@@ -280,10 +280,10 @@ export default function CPUExecution() {
       {/* Controls */}
       <div className="flex items-center justify-between gap-4">
         <button
-          onClick={resetToAlgorithmSelection}
+          onClick={() => goToStep('queue')}
           className="text-sm font-mono text-slate-500 hover:text-slate-300 transition-colors cursor-pointer"
         >
-          ← Back to Algorithm Selection
+          ← Back to Queue
         </button>
 
         <div className="flex gap-3">

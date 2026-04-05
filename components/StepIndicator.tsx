@@ -4,9 +4,9 @@ import { AppStep } from '@/types';
 import { useSimStore } from '@/store/useSimStore';
 
 const STEPS: { id: AppStep; label: string }[] = [
+  { id: 'algorithm', label: 'Algorithm' },
   { id: 'create', label: 'Create' },
   { id: 'queue', label: 'Queue' },
-  { id: 'algorithm', label: 'Algorithm' },
   { id: 'execution', label: 'Execute' },
   { id: 'complete', label: 'Complete' },
 ];
